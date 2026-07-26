@@ -3,9 +3,9 @@ services:
     build:
       context: frontend
     environment:
-      - REACT_APP_API_URL=/api 
+      - REACT_APP_API_URL=/api  
     expose:
-      - "3001"
+      - "3000"
   api:
     build:
       context: backend
@@ -29,7 +29,7 @@ services:
   mongoExpress:
     image: mongo-express
     expose:
-      - "3001"
+      - "8081"
     environment:
       - ME_CONFIG_SITE_BASEURL=/mongo/
       - ME_CONFIG_BASICAUTH_USERNAME=sarvin
@@ -38,7 +38,7 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=pass123
       - ME_CONFIG_MONGODB_SERVER=db
     depends_on:
-      - db    
+      - db
   nginx:
     image: nginx:1.30.4-alpine3.24
     ports:
