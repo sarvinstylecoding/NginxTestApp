@@ -48,7 +48,6 @@ services:
     depends_on:
       - web
       - api
-      - mongoExpress
     restart: unless-stopped
 volumes:
   mongodb-sarvin:
