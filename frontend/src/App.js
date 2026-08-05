@@ -16,7 +16,7 @@ function App() {
     try {
       const { data } = await api.get(usersEndpoint);
       console.log ("data" , data)
-      setUsers(data);
+      setUsers(data.data);
     } catch (err) {
       setError("Could not fetch users!");
     }
