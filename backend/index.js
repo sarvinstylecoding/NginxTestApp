@@ -43,7 +43,7 @@ app.get("/users", async (req, res) => {
     if (!db) return res.status(500).send("DB not ready");
 
     const users = await db.collection("users").find().toArray();
-    res.send(users);
+    res.send({ users :users , api : process.env.API_NAME });
   } catch (err) {
     console.error(err);
     res.status(500).send(err.message);
