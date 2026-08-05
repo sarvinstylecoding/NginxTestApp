@@ -4,7 +4,7 @@ const cors = require("cors");
 const { MongoClient } = require("mongodb");
 require('dotenv').config();
 
- 
+
 
 const url = process.env.DB_URL // `mongodb://admin:pass123@localhost:27017`;
 const dbName = "user_db";
@@ -43,7 +43,7 @@ app.get("/users", async (req, res) => {
     if (!db) return res.status(500).send("DB not ready");
 
     const users = await db.collection("users").find().toArray();
-    res.send({ users :users , api : process.env.API_NAME });
+    res.send({ data: users, api: process.env.API_NAME });
   } catch (err) {
     console.error(err);
     res.status(500).send(err.message);
@@ -52,7 +52,7 @@ app.get("/users", async (req, res) => {
 
 
 app.post("/users", async (req, res) => {
-  console.log( req.body.name)
+  console.log(req.body.name)
   try {
     if (!db) return res.status(500).send("DB not ready");
 
