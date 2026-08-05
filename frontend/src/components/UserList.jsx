@@ -3,9 +3,10 @@ import UserListItem from "./UserListItem";
 import "./UserList.css";
 
 function UserList({ users, onDeleteUser }) {
+  console.log("users map " , users)
   return (
     <ul className="MovieList">
-      {users.map((user) => (
+      {users?.map((user) => (
         <UserListItem
           key={user._id}
           user={user}

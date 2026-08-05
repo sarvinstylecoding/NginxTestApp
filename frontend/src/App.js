@@ -15,7 +15,7 @@ function App() {
  const fetchUsers = async () => {
     try {
       const { data } = await api.get(usersEndpoint);
-      console.log (data)
+      console.log ("data" , data)
       setUsers(data);
     } catch (err) {
       setError("Could not fetch users!");
