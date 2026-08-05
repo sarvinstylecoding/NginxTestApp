@@ -6,7 +6,7 @@ services:
       - REACT_APP_API_URL=/api  
     expose:
       - 3000
-  api:
+  api1:
     build:
       context: backend
     expose:
