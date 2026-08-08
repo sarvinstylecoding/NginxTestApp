@@ -63,7 +63,7 @@ app.post("/users", async (req, res) => {
 
     await db.collection("users").insertOne(newUser);
 
-    res.status(201).send(newUser);
+    res.status(201).send({...newUser, api: process.env.API_NAME });
   } catch (err) {
     console.error(err);
     res.status(500).send(err.message);
