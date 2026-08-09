@@ -17,6 +17,29 @@ services:
     depends_on:
       - db
     command: ["node", "index.js"]
+  api2:
+    build:
+      context: backend
+    expose:
+      - 3001
+    environment:
+      - DB_URL=mongodb://admin:pass123@db:27017/?authSource=admin
+    restart: always
+    depends_on:
+      - db
+    command: ["node", "index.js"]
+  api3:
+    build:
+      context: backend
+    expose:
+      - 3001
+    environment:
+      - DB_URL=mongodb://admin:pass123@db:27017/?authSource=admin
+    restart: always
+    depends_on:
+      - db
+    command: ["node", "index.js"]
+
   db:
     image: mongo:4.4
     ports:
