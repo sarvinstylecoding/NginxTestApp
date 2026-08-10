@@ -12,7 +12,6 @@ services:
     expose:
       - 3001
     environment:
-      - API_NAME=api1
       - DB_URL=mongodb://admin:pass123@db:27017/?authSource=admin
     restart: always
     depends_on:
@@ -24,7 +23,6 @@ services:
     expose:
       - 3001
     environment:
-      - API_NAME=api2
       - DB_URL=mongodb://admin:pass123@db:27017/?authSource=admin
     restart: always
     depends_on:
@@ -36,7 +34,6 @@ services:
     expose:
       - 3001
     environment:
-      - API_NAME=api3
       - DB_URL=mongodb://admin:pass123@db:27017/?authSource=admin
     restart: always
     depends_on:
