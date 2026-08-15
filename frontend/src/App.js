@@ -9,6 +9,7 @@ function App() {
     const usersEndpoint = "/users";
 
   const [users, setUsers] = useState([{name :'sarvin'}]);
+  const [proccess, setProcess] = useState('');  
   const [error, setError] = useState();
 
 
@@ -36,8 +37,21 @@ function App() {
   const handleAddUser = async (name) => {
     try {
       const newUser = { name };
+setProcess('please wait ...')
+      const { data } = await api.get('/proccessData');
 
-      const { data } = await api.post(usersEndpoint, newUser);
+      setProcess('completed.')
+    } catch (err) {
+      console.log(err)
+      setError("Could not add user!");
+    }
+  };
+  
+  
+  const onProccessClicked = async (name) => {
+    try {
+
+      const { data } = await api.get(usersEndpoint, newUser);
 
       setUsers([...users, data]);
     } catch (err) {
@@ -50,7 +64,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <UserForm onAddUser={handleAddUser} />
+      <UserForm onAddUser={handleAddUser} onProccessClicked={onProccessClicked} />
       {error && (
         <p role="alert" className="Error">
           {error}

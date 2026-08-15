@@ -53,7 +53,7 @@ app.get("/users", async (req, res) => {
 app.get("/proccessData", async (req, res) => {
 
     setTimeout(()=>{
-          res.send({ data: {user : "sarvin"} });
+          res.send({ data: {status : "completed"} });
 
     }, 5000)
 });

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 
-function UserForm({ onAddUser }) {
+function UserForm({ onAddUser , onProccessClicked}) {
   const [name, setName] = useState("");
 
   const handleChange = (e) => setName(e.target.value);
@@ -24,6 +24,8 @@ function UserForm({ onAddUser }) {
         type="text"
         value={name}
       />
+      <button onClick={handleClick} >proccess</button>
+      <p></p>
     </form>
   );
 }
