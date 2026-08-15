@@ -50,6 +50,14 @@ app.get("/users", async (req, res) => {
   }
 });
 
+app.get("/proccessData", async (req, res) => {
+
+    setTimeout(()=>{
+          res.send({ data: {user : "sarvin"} });
+
+    }, 5000)
+});
+
 
 app.post("/users", async (req, res) => {
   console.log(req.body.name)
