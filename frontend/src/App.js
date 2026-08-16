@@ -14,14 +14,14 @@ function App() {
   const fetchUsers = async () => {
     try {
       const { data } = await api.get(usersEndpoint);
-      console.log("data", data);
+      console.log("data", data)
       setUsers(data.data);
     } catch (err) {
       setError("Could not fetch users!");
     }
   };
-
   const handleDeleteUser = async (user) => {
+    console.log(user)
     if (user) {
       try {
         setUsers(users?.filter((u) => u.name !== user.name));
@@ -33,7 +33,6 @@ function App() {
       }
     }
   };
-
   const handleAddUser = async (name) => {
     try {
       const newUser = { name };
@@ -42,10 +41,13 @@ function App() {
 
       setUsers([...users, data]);
     } catch (err) {
-      console.log(err);
+      console.log(err)
       setError("Could not add user!");
     }
   };
+  useEffect(() => {
+    fetchUsers()
+  }, []);
 
   // Process Data
   const handleProcessData = async () => {
@@ -63,9 +65,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+
 
   return (
     <div className="App">

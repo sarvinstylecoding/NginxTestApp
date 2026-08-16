@@ -55,7 +55,7 @@ app.get("/proccessData", async (req, res) => {
     setTimeout(()=>{
           res.send({ data: {status : "completed"} });
 
-    }, 5000)
+    }, 7000)
 });
 
 
