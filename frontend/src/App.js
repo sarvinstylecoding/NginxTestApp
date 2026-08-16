@@ -38,12 +38,9 @@ function App() {
     try {
       const newUser = { name };
 
-      // فعلاً اینجا API مربوط به User را صدا بزن
-      // await api.post(usersEndpoint, newUser);
+      const { data } = await api.post(usersEndpoint, newUser);
 
-      console.log("New user:", newUser);
-
-      fetchUsers();
+      setUsers([...users, data]);
     } catch (err) {
       console.log(err);
       setError("Could not add user!");
