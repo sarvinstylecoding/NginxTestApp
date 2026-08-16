@@ -24,7 +24,7 @@ function UserForm({ onAddUser , onProccessClicked}) {
         type="text"
         value={name}
       />
-      <button onClick={handleClick} >proccess</button>
+      <button onClick={onProccessClicked} >proccess</button>
       <p></p>
     </form>
   );
