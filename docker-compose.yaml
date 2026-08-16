@@ -46,6 +46,7 @@ services:
       - 80:80
       - 443:443
     volumes:
+      - nginx_cache:/data/nginx/cache
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro 
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
@@ -54,6 +55,7 @@ services:
     restart: unless-stopped
 volumes:
   mongodb-sarvin:
+  nginx_cache:
 
 
 
