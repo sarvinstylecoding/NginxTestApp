@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 
-function UserForm({ onAddUser , onProccessClicked}) {
+function UserForm({ onAddUser ,proccess, onProccessClicked}) {
   const [name, setName] = useState("");
 
   const handleChange = (e) => setName(e.target.value);
@@ -25,7 +25,7 @@ function UserForm({ onAddUser , onProccessClicked}) {
         value={name}
       />
       <button onClick={onProccessClicked} >proccess</button>
-      <p></p>
+      <span>{proccess}</span>
     </form>
   );
 }

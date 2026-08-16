@@ -64,7 +64,7 @@ setProcess('please wait ...')
   }, []);
   return (
     <div className="App">
-      <UserForm onAddUser={handleAddUser} onProccessClicked={onProccessClicked} />
+      <UserForm onAddUser={handleAddUser} proccess={proccess} onProccessClicked={onProccessClicked} />
       {error && (
         <p role="alert" className="Error">
           {error}
