@@ -1,76 +1,98 @@
-import logo from './logo.svg';
 import './App.css';
 import UserList from './components/UserList';
-import { useState , useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import UserForm from './components/UserForm';
 import api from "./services/api";
 
 function App() {
-    const usersEndpoint = "/users";
+  const usersEndpoint = "/users";
 
-  const [users, setUsers] = useState([{name :'sarvin'}]);
-  const [proccess, setProcess] = useState('');  
-  const [error, setError] = useState();
+  const [users, setUsers] = useState([{ name: 'sarvin' }]);
+  const [proccess, setProcess] = useState('');
+  const [error, setError] = useState('');
 
-
- const fetchUsers = async () => {
+  const fetchUsers = async () => {
     try {
       const { data } = await api.get(usersEndpoint);
-      console.log ("data" , data)
+      console.log("data", data);
       setUsers(data.data);
     } catch (err) {
       setError("Could not fetch users!");
     }
   };
-  const handleDeleteUser = async (user) => {
-    console.log(user)
-    if (user){
-    try {
-      setUsers(users?.filter((u) => u.name !== user.name));
 
-      await api.delete(`${usersEndpoint}/${user.name}`);
-    } catch (err) {
-      setError("Could not delete user!");
-      fetchUsers();
-    }}
+  const handleDeleteUser = async (user) => {
+    if (user) {
+      try {
+        setUsers(users?.filter((u) => u.name !== user.name));
+
+        await api.delete(`${usersEndpoint}/${user.name}`);
+      } catch (err) {
+        setError("Could not delete user!");
+        fetchUsers();
+      }
+    }
   };
+
   const handleAddUser = async (name) => {
     try {
       const newUser = { name };
-setProcess('please wait ...')
-      const { data } = await api.get('/proccessData');
 
-      setProcess('completed.')
+      // فعلاً اینجا API مربوط به User را صدا بزن
+      // await api.post(usersEndpoint, newUser);
+
+      console.log("New user:", newUser);
+
+      fetchUsers();
     } catch (err) {
-      console.log(err)
+      console.log(err);
       setError("Could not add user!");
     }
   };
-  
-  
-  const onProccessClicked = async (name) => {
+
+  // Process Data
+  const handleProcessData = async () => {
     try {
+      setProcess("Please wait...");
 
-      const { data } = await api.get(usersEndpoint, newUser);
+      const { data } = await api.get("/proccessData");
 
-      setUsers([...users, data]);
+      console.log("process data:", data);
+
+      setProcess(data.data.status);
     } catch (err) {
-      console.log(err)
-      setError("Could not add user!");
+      console.log(err);
+      setError("Could not process data!");
     }
   };
+
   useEffect(() => {
-    fetchUsers()
+    fetchUsers();
   }, []);
+
   return (
     <div className="App">
-      <UserForm onAddUser={handleAddUser} proccess={proccess} onProccessClicked={onProccessClicked} />
+
+      <UserForm onAddUser={handleAddUser} />
+
+      <button onClick={handleProcessData}>
+        Process Data
+      </button>
+
+      <span>{proccess}</span>
+
       {error && (
         <p role="alert" className="Error">
           {error}
         </p>
       )}
-      <UserList users={users} onDeleteUser={handleDeleteUser} />    </div>
+
+      <UserList
+        users={users}
+        onDeleteUser={handleDeleteUser}
+      />
+
+    </div>
   );
 }
 
