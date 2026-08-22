@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { MongoClient } = require("mongodb");
 require('dotenv').config();
-
+const fs = require("fs/promises");
 
 
 const url = process.env.DB_URL // `mongodb://admin:pass123@localhost:27017`;
@@ -53,11 +53,31 @@ app.get("/users", async (req, res) => {
 app.get("/proccessData", async (req, res) => {
 
     setTimeout(()=>{
-          res.send({ data: {status : "completed"} });
+          res.send({ data: {status : "completed" } });
 
     }, 7000)
 });
 
+app.get("/bigData", async (req, res) => {
+  try {
+    const data = await fs.readFile("./10m.json", "utf8");
+
+    setTimeout(() => {
+      res.json({
+        data: {
+          status: "completed",
+          data: JSON.parse(data)
+        }
+      });
+    }, 7000);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Could not read A.json"
+    });
+  }
+});
 
 app.post("/users", async (req, res) => {
   console.log(req.body.name)

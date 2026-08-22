@@ -9,6 +9,8 @@ function App() {
 
   const [users, setUsers] = useState([{ name: 'sarvin' }]);
   const [proccess, setProcess] = useState('');
+  const [bigDataStatus, setBigDataStatus] = useState('');
+
   const [error, setError] = useState('');
 
   const fetchUsers = async () => {
@@ -65,18 +67,36 @@ function App() {
     }
   };
 
+  // Big Data
+  const handleBigData = async () => {
+    try {
+      setBigDataStatus("Please wait...");
+
+      const { data } = await api.get("/bigData");
+
+      console.log("bigData", data);
+
+      setBigDataStatus(data.data.status);
+    } catch (err) {
+      console.log(err);
+      setError("Could not process data!");
+    }
+  };
+
 
 
   return (
     <div className="App">
 
       <UserForm onAddUser={handleAddUser} />
-
       <button onClick={handleProcessData}>
         Process Data
       </button>
+      <button onClick={handleBigData}>
+        Big Data
+      </button>
 
-      <span>{proccess}</span>
+      <span>{proccess}</span> <span>{bigDataStatus}</span> 
 
       {error && (
         <p role="alert" className="Error">
