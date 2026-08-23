@@ -41,7 +41,8 @@ services:
     depends_on:
       - db
   nginx:
-    image: nginx:1.30.4-alpine3.24
+    # image: nginx:1.30.4-alpine3.24
+    image: peytonyip/nginx-brotli:1.30.4
     ports:
       - 80:80
       - 443:443
